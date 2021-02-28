@@ -1,0 +1,56 @@
+{
+  "name": "@tylerbu/fluidframework-pnpm-script",
+  "version": "0.0.1",
+  "description": "Adjusts the FluidFramework repo to be pnpm compatible.",
+  "keywords": [
+    "fluid"
+  ],
+  "homepage": "https://github.com/tylerbutler/FluidFramework-pnpm-script",
+  "bugs": {
+    "url": "https://github.com/tylerbutler/FluidFramework-pnpm-script/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tylerbutler/FluidFramework-pnpm-script"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Tyler Butler",
+    "email": "tyler@tylerbutler.com",
+    "url": "https://tylerbutler.com/"
+  },
+  "main": "dist/cli.js",
+  "bin": {
+    "binstall": "dist/cli.js"
+  },
+  "scripts": {
+    "binstall": "ts-node ./src/cli.ts",
+    "build": "tsc -b",
+    "clean": "rimraf -r dist/** bin/**",
+    "lint": "eslint --format stylish .",
+    "release": "echo \"NYI\""
+  },
+  "dependencies": {
+    "@tylerbu/bin-installer": "^0.0.2",
+    "bin-wrapper": "^4.1.0",
+    "cli-progress": "^3.9.0",
+    "del": "^6.0.0",
+    "os-filter-obj": "^2.0.0",
+    "yargs": "^16.2.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.7",
+    "@types/node": "^14.14.31",
+    "@types/yargs": "^15.0.13",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
+    "copyfiles": "2.4.0",
+    "eslint": "^7.20.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-unicorn": "^23.0.0",
+    "rimraf": "^3.0.2",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.2"
+  }
+}
