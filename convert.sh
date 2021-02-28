@@ -98,6 +98,9 @@ cd ..
 
 echo "Add custom build tool as dep"
 pnpm add ./fluid-build-pnpm/ --workspace-root
+cd server/routerlicious
+pnpm add ../../fluid-build-pnpm/ --workspace-root
+cd ../..
 git add .
 git commit -m 'pnpm-ify: Commit custom fluid-build'
 
