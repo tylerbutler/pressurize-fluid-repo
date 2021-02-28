@@ -20,9 +20,9 @@ jq 'del(.packages)' lerna.json > lerna2.json
 rimraf lerna.json
 mv lerna2.json lerna.json
 
-# jq 'del(.packages)' server/routerlicious/lerna.json > server/routerlicious/lerna2.json
-# rimraf server/routerlicious/lerna.json
-# mv server/routerlicious/lerna2.json server/routerlicious/lerna.json
+jq 'del(.packages)' server/routerlicious/lerna.json > server/routerlicious/lerna2.json
+rimraf server/routerlicious/lerna.json
+mv server/routerlicious/lerna2.json server/routerlicious/lerna.json
 
 echo "Adding pnpm config files"
 echo "packages:
@@ -80,12 +80,14 @@ sd '"postinstall": ' '"-postinstall": ' "server/routerlicious/package.json"
 
 # misc workarounds
 sd '"lint": ' '"-lint": ' "packages/drivers/odsp-driver/package.json"
-sd '"build:test": "tsc --project ./src/test/tsconfig.json"' '"build:test": "Skipping"' "packages/drivers/odsp-driver/package.json"
+sd '"build:test": "tsc --project ./src/test/tsconfig.json"' '"build:test": "echo Skipping"' "packages/drivers/odsp-driver/package.json"
+
+git commit -m 'pnpm-ify: Update npm run commands'
 
 # Revert changes to the end-to-end tests
-git checkout main -- packages/test/end-to-end-tests/
+git checkout origin/main -- packages/test/end-to-end-tests/
 git add .
-git commit -m 'pnpm-ify: Update npm run commands'
+git commit -m 'pnpm-ify: Revert some changes'
 
 echo "Downloading custom fluid-build to ./fluid-build-pnpm..."
 rimraf fluid-build-pnpm
