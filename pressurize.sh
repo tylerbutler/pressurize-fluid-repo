@@ -7,7 +7,7 @@ echo "Installing pnpm and global deps"
 npm i -g pnpm
 pnpm i -g rimraf tiged
 
-hr 1
+# hr 1
 
 echo "Removing old lockfiles"
 rm *package-lock*
@@ -15,7 +15,7 @@ cd server/routerlicious
 rm *package-lock*
 cd ../..
 
-hr 2
+# hr 2
 
 echo "Updating packages from lerna.json"
 # jq '. + {"packages": [ "examples/**", "experimental/**", "packages/**", "server/routerlicious/packages/gitresources/", "server/routerlicious/packages/local-server/", "server/routerlicious/packages/protocol-base/", "server/routerlicious/packages/protocol-definitions/"]}' lerna.json > lerna2.json
@@ -28,7 +28,7 @@ jq 'del(.packages)' server/routerlicious/lerna.json > server/routerlicious/lerna
 rimraf server/routerlicious/lerna.json
 mv server/routerlicious/lerna2.json server/routerlicious/lerna.json
 
-hr 3
+# hr 3
 
 echo "Adding pnpm config files"
 echo "packages:
@@ -60,9 +60,9 @@ echo "enable-modules-dir = true
 shamefully-hoist = true" > server/routerlicious/.npmrc
 
 git add .
-git commit -m 'pnpm-ify: Add new files'
+git commit -m 'Pressurize: Add pnpm config files'
 
-hr 4
+# hr 4
 
 echo "Updating run commands to use pnpm (takes 1-2 mins)"
 for file in $(fd package.json --type file); do
@@ -75,7 +75,7 @@ for file in $(fd package.json --type file); do
     sd 'npm run ' 'pnpm run ' "$file"
 done
 
-hr 5
+# hr 5
 
 echo '  lerna run ==> pnpm -r '
 sd 'lerna run ' 'pnpm -r ' "package.json"
@@ -90,25 +90,25 @@ sd ' --stream' ' --workspace-concurrency 8' "server/routerlicious/package.json"
 sd '"postinstall": ' '"-postinstall": ' "server/routerlicious/package.json"
 
 git add .
-git commit -m 'pnpm-ify: Update npm run commands'
+git commit -m 'Pressurize: Update npm run commands'
 
-hr 6
+# hr 6
 
 # misc workarounds
 sd '"lint": ' '"-lint": ' "packages/drivers/odsp-driver/package.json"
 sd '"build:test": "tsc --project ./src/test/tsconfig.json"' '"build:test": "echo Skipping"' "packages/drivers/odsp-driver/package.json"
 
 git add .
-git commit -m 'pnpm-ify: Apply workarounds'
+git commit -m 'Pressurize: Apply workarounds'
 
-hr 7
+# hr 7
 
 # Revert changes to the end-to-end tests
 sd 'pnpm:' 'npm:' "packages/test/end-to-end-tests/package.json"
 git add .
-git commit -m 'pnpm-ify: Revert some changes'
+git commit -m 'Pressurize: Revert some changes'
 
-hr 8
+# hr 8
 
 echo "Downloading custom fluid-build to ./fluid-build-pnpm..."
 rimraf fluid-build-pnpm
@@ -119,7 +119,7 @@ npm install
 npm run build
 cd ..
 
-hr 9
+# hr 9
 
 echo "Add custom build tool as dep"
 pnpm add ./fluid-build-pnpm/ --workspace-root
@@ -127,9 +127,9 @@ cd server/routerlicious
 pnpm add ../../fluid-build-pnpm/ --workspace-root
 cd ../..
 git add .
-git commit -m 'pnpm-ify: Commit custom fluid-build'
+git commit -m 'Pressurize: Commit custom fluid-build'
 
 echo "We made 5 commits to this branch:"
 git log --oneline --decorate --graph -5
 
-echo "Done! Now run 'pnpm install', then 'pnpm run build:fast'"
+echo "Done! Now run 'pnpm install', then 'pnpm run build:fast'."
