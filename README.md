@@ -38,7 +38,21 @@ Oh yeah, you'll need `jq`. If you're using Ubuntu or debian, you can install it 
 
 ## Install
 
-Clone the repo, then run the `convert.sh` script in your FluidFramework repo directory.
+You can either clone the repo and run the `pressurize.sh` script in your FluidFramework repo directory, or you
+can download the script like so:
+
+`curl https://raw.githubusercontent.com/tylerbutler/pressurize-fluid-repo/main/pressurize.sh > pressurize.sh`
+
+Then run `pressurize.sh` in your FluidFramework directory.
 
 **You should create a new branch before running the script!** The script will make changes to your repo and commit
-results.
+results. It will not push anything to a remote.
+
+## What it does
+
+The script will do the following:
+
+- Add pnpm config files
+- Deletes existing package-lock.json files
+- Updates scripts in package.json to use pnpm
+- Applies some "workarounds" by disabling some npm tasks that currently cause issues with pnpm
