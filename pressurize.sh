@@ -104,7 +104,7 @@ git commit -m 'Pressurize: Apply workarounds'
 # hr 7
 
 # Revert changes to the end-to-end tests
-sd 'pnpm:' 'npm:' "packages/test/end-to-end-tests/package.json"
+sd 'pnpm:' 'npm:' "packages/test/test-end-to-end-tests/package.json"
 git add .
 git commit -m 'Pressurize: Revert some changes'
 
